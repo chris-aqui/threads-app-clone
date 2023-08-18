@@ -2,14 +2,14 @@ import '../globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ClerkProvider } from "@clerk/nextjs"
-import Topbar from '@/components/shared/Topbar'
-import Bottombar from '@/components/shared/Bottombar'
-import LeftSidebar from '@/components/shared/LeftSidebar'
-import RightSidebar from '@/components/shared/RightSidebar'
+import Topbar from '@/components/shared/Topbar.component'
+import Bottombar from '@/components/shared/Bottombar.component'
+import LeftSidebar from '@/components/shared/LeftSidebar.component'
+import RightSidebar from '@/components/shared/RightSidebar.component'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Threads Clone',
   description: 'A clone of the popular threads app built using Nextjs 13',
 }
