@@ -40,6 +40,7 @@ interface Props {
 const AccountProfile = ({ user, btnTitle }: Props) => {
 	const router = useRouter();
 	const pathname = usePathname();
+	// startUpload is a function that takes an array of files and returns a promise
 	const { startUpload } = useUploadThing("media");
 
 	const [files, setFiles] = useState<File[]>([]);
@@ -61,11 +62,13 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 		if (hasImageChanged) {
 			const imgRes = await startUpload(files);
 
+			// if image is uploaded successfully, set the image url
 			if (imgRes && imgRes[0].fileUrl) {
 				values.profile_photo = imgRes[0].fileUrl;
 			}
 		}
 
+		// update user
 		await updateUser({
 			name: values.name,
 			path: pathname,

@@ -3,24 +3,24 @@
 import { FilterQuery, SortOrder } from "mongoose";
 import { revalidatePath } from "next/cache";
 
-// import Community from "../models/community.model";
-// import Thread from "../models/thread.model";
-// import User from "../models/user.model";
+import Community from "../models/community.model";
+import Thread from "../models/thread.model";
+import User from "../models/user.model";
 
-// import { connectToDB } from "../mongoose";
+import { connectToDB } from "../mongoose";
 
 export async function fetchUser(userId: string) {
 	console.log('hello from fetchUser')
-	// try {
-	// 	connectToDB();
+	try {
+		connectToDB();
 
-	// 	return await User.findOne({ id: userId }).populate({
-	// 		path: "communities",
-	// 		model: Community,
-	// 	});
-	// } catch (error: any) {
-	// 	throw new Error(`Failed to fetch user: ${error.message}`);
-	// }
+		return await User.findOne({ id: userId }).populate({
+			path: "communities",
+			model: Community,
+		});
+	} catch (error: any) {
+		throw new Error(`Failed to fetch user: ${error.message}`);
+	}
 }
 
 interface Params {
@@ -55,6 +55,8 @@ export async function updateUser({
 			{ upsert: true }
 		);
 
+		// revalidatePath is a Next.js function that revalidates the cache for the given path
+		// This is used to update the user's profile page after the user updates their profile
 		if (path === "/profile/edit") {
 			revalidatePath(path);
 		}
