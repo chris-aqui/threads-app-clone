@@ -1,4 +1,4 @@
-"use server";
+"use server"; // nextJS directive to allow this file to be run on the server
 
 import { revalidatePath } from "next/cache";
 
